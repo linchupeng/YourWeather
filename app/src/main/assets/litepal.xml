@@ -1,0 +1,9 @@
+<litepal>
+    <dbname value ="your_weather"></dbname>
+    <version value ="1"></version>
+    <list>
+        <mapping class ="com.lcpdev.yourweather.database.Province"></mapping>
+        <mapping class ="com.lcpdev.yourweather.database.City"></mapping>
+        <mapping class ="com.lcpdev.yourweather.database.County"></mapping>
+    </list>
+</litepal>
