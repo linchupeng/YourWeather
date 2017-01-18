@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<group android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_city"
+        android:icon="@mipmap/addcity"
+        android:title="添加城市"></item>
+    <item
+        android:id="@+id/multi_cities"
+        android:icon="@mipmap/mutli_city"
+        android:title="城市管理"></item>
+    <item
+        android:id="@+id/setting"
+        android:icon="@mipmap/setting"
+        android:title="设置"></item>
+</group>
+    <item android:title="YourWeather">
+    <menu>
+    <item
+        android:id="@+id/about"
+        android:icon="@mipmap/about"
+        android:title="关于"></item>
+    <item
+        android:id="@+id/out"
+        android:icon="@mipmap/out"
+        android:title="退出"></item>
+        </menu>
+    </item>
+</menu>
