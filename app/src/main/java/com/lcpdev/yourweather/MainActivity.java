@@ -1,5 +1,6 @@
 package com.lcpdev.yourweather;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -25,11 +26,16 @@ public class MainActivity extends BaseActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
 //            actionBar.setHomeAsUpIndicator(R.mipmap.menu);
         }
-        navigationView.setCheckedItem(R.id.nav_city);
+        navigationView.setCheckedItem(R.id.add_city);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Toast.makeText(MainActivity.this, "点击1", Toast.LENGTH_SHORT).show();
+                switch (item.getItemId()){
+                    case R.id.add_city:
+                        Intent intent = new Intent(MainActivity.this,ChooseCity.class);
+                        startActivity(intent);
+                        break;
+                }
                 return false;
             }
         });

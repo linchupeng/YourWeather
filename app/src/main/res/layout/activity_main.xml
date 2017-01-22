@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
-    <FrameLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <android.support.v7.widget.Toolbar
@@ -14,7 +14,19 @@
         android:layout_height="?actionBarSize"
         android:background="?colorPrimary">
     </android.support.v7.widget.Toolbar>
-    </FrameLayout>
+        <include
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            layout="@layout/choose_city"></include>
+        <!--<fragment-->
+            <!--android:id="@+id/choose_area_fragment"-->
+            <!--android:name="com.lcpdev.yourweather.chooseArea"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+        <!--</fragment>-->
+
+    </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

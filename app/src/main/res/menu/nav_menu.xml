@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <group android:checkableBehavior="single">
     <item
-        android:id="@+id/nav_city"
+        android:id="@+id/add_city"
         android:icon="@mipmap/addcity"
         android:title="添加城市"></item>
     <item
