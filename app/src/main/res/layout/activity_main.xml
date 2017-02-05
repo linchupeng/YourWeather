@@ -2,9 +2,12 @@
 <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -12,19 +15,14 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="?colorPrimary">
+        android:background="?colorPrimary"
+        >
     </android.support.v7.widget.Toolbar>
         <include
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            layout="@layout/choose_city"></include>
-        <!--<fragment-->
-            <!--android:id="@+id/choose_area_fragment"-->
-            <!--android:name="com.lcpdev.yourweather.chooseArea"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent">-->
-
-        <!--</fragment>-->
+            layout="@layout/choose_city">
+        </include>
 
     </android.support.design.widget.CoordinatorLayout>
 

@@ -1,6 +1,7 @@
 package com.lcpdev.yourweather;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -60,7 +61,7 @@ public class ChooseCity extends BaseActivity {
     private int currentLeveL;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_city);
         initView();
@@ -86,6 +87,13 @@ public class ChooseCity extends BaseActivity {
                 } else if (currentLeveL == LEVEL_CITY) {
                     selectedCity = cityList.get(position);
                     queryCounty();
+                }else if (currentLeveL == LEVEL_COUNTY){
+                    String weatherId = countyList.get(position).getWeatherId();
+                    Intent intent =new Intent(ChooseCity.this,WeatherActivity.class);
+                    intent.putExtra("weather_id",weatherId);
+                    Log.d("weatherID",weatherId);
+                    startActivity(intent);
+
                 }
             }
         });
@@ -169,7 +177,6 @@ public class ChooseCity extends BaseActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 runOnUiThread(new Runnable() {
-                    @RequiresApi(api = Build.VERSION_CODES.M)
                     @Override
                     public void run() {
                         closeProgressDialog();

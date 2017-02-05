@@ -8,7 +8,7 @@ package com.lcpdev.yourweather.gson;
 public class Aqi {
     public AqiCity city;
 
-    private class AqiCity {
+  public class AqiCity {
         public String aqi;
         public String pm25;
     }
