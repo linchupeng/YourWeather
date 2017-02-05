@@ -1,3 +1,4 @@
+
 package com.lcpdev.yourweather;
 
 import android.content.Intent;
@@ -17,7 +18,6 @@ import android.widget.Toast;
 
 
 import static com.lcpdev.yourweather.R.id.masked;
-import static com.lcpdev.yourweather.R.id.toolbar;
 
 public class MainActivity extends BaseActivity {
     private DrawerLayout mDrawerLayout;

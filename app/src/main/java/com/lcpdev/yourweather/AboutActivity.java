@@ -11,7 +11,9 @@ import android.widget.Button;
  * Created by linchupeng on 2017/2/4.
  * github:https://github.com/linchupeng/YourWeather
  */
-
+/**
+ *Navigation功能之设置界面及功能的实现
+ */
 public class AboutActivity extends BaseActivity {
     private Button btn_code;
     private Button btn_shared;
@@ -39,8 +41,16 @@ public class AboutActivity extends BaseActivity {
         @Override
         public void onClick(View view) {
             switch (view.getId()){
+                //查看项目源代码
                 case R.id.btn_code:
                     goToHtml("https://github.com/linchupeng/YourWeather");
+                    break;
+                //分享天气应用
+                case R.id.btn_share:
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here");;
+                    startActivity(Intent.createChooser(shareIntent,"分享到"));
                     break;
 
             }

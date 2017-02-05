@@ -53,6 +53,7 @@
                     app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
                     />
             </RelativeLayout>
+            <!--<include layout="@layout/toolbar_layout"></include>-->
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
