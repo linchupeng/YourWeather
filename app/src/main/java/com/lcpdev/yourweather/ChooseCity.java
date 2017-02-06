@@ -112,7 +112,7 @@ public class ChooseCity extends BaseActivity {
 
     private void queryProvince() {
         titleText.setText("中国");
-        backBtn.setVisibility(View.GONE);
+        backBtn.setVisibility(View.VISIBLE);
         provinceList = DataSupport.findAll(Province.class);
         if (provinceList.size() > 0) {
             dataList.clear();

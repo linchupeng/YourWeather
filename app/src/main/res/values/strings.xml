@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">你的天气</string>
     <string name="thanks">• 郭霖:http://my.csdn.net/sinyu890807\n• stormzhang: http://stormzhang.com/posts\n• xcc3641:http://imxie.cc\n• 和风天气提供数据支持</string>
-     <string name="settingContent">你的天气是一款简单而又不失简约的天气应用，没有过多的权限和常驻内存。
-            这么多天气软件，你选择了我，这是我的幸运。这款项目已经开源，目的是为了曾经遇到棘手问题而又无处咨询搜索不到的我们。
-            开源的路上希望能给你点思路也能给我错误的反馈，致还在开发这条道路前景的我们:-)。</string>
+     <string name="settingContent">你的天气是一款简单而又不失简约的天气应用，没有过多的权限和常驻内存。这款项目已经开源，目的是为了曾经遇到棘手问题而又无处咨询搜索不到的我们。开源的路上希望能给你点思路也能给我错误的反馈，致还在开发这条道路前景的我们:-)。</string>
 </resources>
