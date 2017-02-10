@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    >
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <ScrollView
         android:id="@+id/weather_scrollView"
         android:layout_width="match_parent"
@@ -14,9 +13,10 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <include layout="@layout/toolbar"></include>
             <include layout="@layout/now"></include>
             <include layout="@layout/forecast"></include>
             <include layout="@layout/item_suggestion"></include>
         </LinearLayout>
     </ScrollView>
-</FrameLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -4,10 +4,13 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -40,7 +43,6 @@ public class ChooseCity extends BaseActivity {
     public static final int LEVEL_CITY = 1;
     public static final int LEVEL_COUNTY = 2;
     private TextView titleText;
-    private Button backBtn;
     private ProgressDialog progressDialog;
     private List<String> dataList = new ArrayList<>();
     private CityAdapter mCityAdapter;
@@ -65,13 +67,65 @@ public class ChooseCity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_city);
         initView();
+        initToolbar();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(" ChooseCity","onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onPostResume();
+        Log.d(" ChooseCity","onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(" ChooseCity","onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(" ChooseCity","onStop");
+    }
+
+    @Override
+    public void onCreateSupportNavigateUpTaskStack(@NonNull TaskStackBuilder builder) {
+        super.onCreateSupportNavigateUpTaskStack(builder);
+    }
+
+    private void initToolbar() {
+        Toolbar toolbarTitle = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbarTitle);
+        if (getSupportActionBar()!=null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            //去除默认Title显示
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+
+        toolbarTitle.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (currentLeveL ==LEVEL_PROVINCE){
+                    finish();
+                }
+                else if (currentLeveL == LEVEL_COUNTY) {
+                    queryCity();
+                } else if (currentLeveL == LEVEL_CITY) {
+                    queryProvince();
+                }
+            }
+        });
+        queryProvince();
+    }
     private void initView() {
-        titleText = (TextView) findViewById(R.id.title_text);
-        backBtn = (Button) findViewById(R.id.back_btn);
+        titleText = (TextView) findViewById(R.id.toolbarCN);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -93,26 +147,18 @@ public class ChooseCity extends BaseActivity {
                     intent.putExtra("weather_id",weatherId);
                     Log.d("weatherID",weatherId);
                     startActivity(intent);
+                    finish();
+                }
+            }
+        });
 
-                }
-            }
-        });
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (currentLeveL == LEVEL_COUNTY) {
-                    queryCity();
-                } else if (currentLeveL == LEVEL_CITY) {
-                    queryProvince();
-                }
-            }
-        });
-        queryProvince();
+//        queryProvince();
     }
-
+    /**
+     * 查询省份
+     */
     private void queryProvince() {
         titleText.setText("中国");
-        backBtn.setVisibility(View.VISIBLE);
         provinceList = DataSupport.findAll(Province.class);
         if (provinceList.size() > 0) {
             dataList.clear();
@@ -127,33 +173,30 @@ public class ChooseCity extends BaseActivity {
             queryFromServer(address, "province");
         }
     }
-
+    /**
+     * 查询城市
+     */
     private void queryCity() {
         titleText.setText(selectedProvince.getProvinceName());
-        backBtn.setVisibility(View.VISIBLE);
         cityList = DataSupport.where("provinceid=?", String.valueOf(selectedProvince.getId())).find(City.class);
-        Log.d("TAG", "Ok");
         if (cityList.size() > 0) {
             dataList.clear();
             for (City city : cityList) {
                 dataList.add(city.getCityName());
             }
-
             mCityAdapter.notifyDataSetChanged();
             recyclerView.smoothScrollToPosition(0);
             currentLeveL = LEVEL_CITY;
-
         } else {
             int provinceCode = selectedProvince.getProvinceCode();
             String address = "http://guolin.tech/api/china/" + provinceCode;
             queryFromServer(address, "city");
-            Log.d("TAG", "Ok1");
         }
-    }
-
+    } /**
+     * 查询县城
+     */
     private void queryCounty() {
         titleText.setText(selectedCity.getCityName());
-        backBtn.setVisibility(View.VISIBLE);
         countyList = DataSupport.where("cityid = ?", String.valueOf(selectedCity.getId())).find(County.class);
         if (countyList.size() > 0) {
             dataList.clear();
@@ -166,11 +209,13 @@ public class ChooseCity extends BaseActivity {
         } else {
             int provinceCode = selectedProvince.getProvinceCode();
             int cityCode = selectedCity.getCityCode();
+            Log.d("TAG", String.valueOf(cityCode));
             String address = "http://guolin.tech/api/china/" + provinceCode + "/" + cityCode;
             queryFromServer(address, "county");
+            Log.d("queryCounty",address);
+
         }
     }
-
     private void queryFromServer(String address, final String type) {
         showProgressDialog();
         HttpUtil.sendOkHttpRequest(address, new Callback() {
@@ -211,14 +256,9 @@ public class ChooseCity extends BaseActivity {
                         }
                     });
                 }
-
-
             }
-
-
         });
     }
-
     private void showProgressDialog() {
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(ChooseCity.this);
@@ -232,6 +272,25 @@ public class ChooseCity extends BaseActivity {
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (currentLeveL ==LEVEL_PROVINCE){
+            finish();
+        }
+        else if (currentLeveL == LEVEL_COUNTY) {
+            queryCity();
+        } else if (currentLeveL == LEVEL_CITY) {
+            queryProvince();
+//            finish();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("chooseActivity","onDestroy");
     }
 }
 

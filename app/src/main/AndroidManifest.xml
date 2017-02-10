@@ -28,22 +28,22 @@
         android:theme="@style/AppTheme">
         <meta-data android:name="com.amap.api.v2.apikey" android:value="3f13d2cadb211053282db1d5088cf791">
         </meta-data>
-
-        <service android:name="com.amap.api.location.APSService"></service>
-        <activity android:name=".MainActivity">
-        </activity>
+        <service android:name="com.amap.api.location.APSService">
+        </service>
         <activity android:name=".model.FirstActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity">
+        </activity>
         <activity android:name=".ChooseCity" />
         <activity android:name=".WeatherActivity">
         </activity>
         <activity
             android:name=".AboutActivity"
-            android:theme="@style/TransparentTheme">
+            >
         </activity>
 
     </application>

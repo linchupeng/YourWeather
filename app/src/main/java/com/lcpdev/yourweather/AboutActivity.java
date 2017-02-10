@@ -1,11 +1,18 @@
 package com.lcpdev.yourweather;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.lcpdev.yourweather.util.ToolBarActivity;
 
 /**
  * Created by linchupeng on 2017/2/4.
@@ -15,6 +22,7 @@ import android.widget.Button;
  *Navigation功能之设置界面及功能的实现
  */
 public class AboutActivity extends BaseActivity {
+
     private Button btn_code;
     private Button btn_shared;
     private Button btn_friends;
@@ -23,7 +31,24 @@ public class AboutActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+//        getWindow().setStatusBarColor(Color.TRANSPARENT);
+//        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE|View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         initView();
+        initToolBar();
+    }
+
+
+
+    private void initToolBar() {
+        Toolbar toolbarAbout = (Toolbar) findViewById(R.id.toolbar_about);
+        setSupportActionBar(toolbarAbout);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbarAbout.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void initView() {

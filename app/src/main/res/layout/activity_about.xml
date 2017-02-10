@@ -7,14 +7,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-    <include layout="@layout/part_setting"/>
+        <include layout="@layout/part_setting"/>
 
     </android.support.v4.widget.NestedScrollView>
+
+
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -33,9 +35,9 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleGravity="center_horizontal"
             app:expandedTitleMarginTop="220dp"
-            android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
             <!-- contentScrim 这个属性是设置折叠后Toolbar的颜色-->
+
             <RelativeLayout
                 android:fitsSystemWindows="true"
                 android:layout_width="match_parent"
@@ -53,14 +55,13 @@
                     app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
                     />
             </RelativeLayout>
-            <!--<include layout="@layout/toolbar_layout"></include>-->
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/toolbar_about"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
-
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 </android.support.design.widget.CoordinatorLayout>

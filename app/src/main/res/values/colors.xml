@@ -7,4 +7,5 @@
     <color name="aboutIcon">#106c99</color>
     <color name="defaultTextColor">#6f6f6f</color>
     <color name="statusBarColor">#00000000</color>
+    <color name="textColor">#FFFFFF</color>
 </resources>
