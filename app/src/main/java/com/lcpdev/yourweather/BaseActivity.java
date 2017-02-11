@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.Process;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -25,7 +27,8 @@ import static com.lcpdev.yourweather.model.DoubleClickExit.exitTime;
  */
 
 public class BaseActivity extends AppCompatActivity{
-
+    private DrawerLayout mDrawerLayout;
+    private Toolbar toolbarBase;
     /**
      * 设置状态栏颜色
      * 也就是所谓沉浸式状态栏
@@ -33,20 +36,26 @@ public class BaseActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-    public static long exitTime = 0;
-    @Override
-    public void onBackPressed() {
-        if (System.currentTimeMillis()-exitTime>2000){
-            Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
-            exitTime = System.currentTimeMillis();
-        }else {
-            finish();
-            System.exit(0);
+        setContentView(R.layout.activity_main);
+        initView();
 
-        }
     }
 
+    private void initView() {
+        mDrawerLayout= (DrawerLayout) findViewById(R.id.drawer_layout);
+        Toolbar indexToolBar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(indexToolBar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,mDrawerLayout,
+                indexToolBar,R.string.drawer_open,R.string.drawer_close);
+        toggle.syncState();
+        mDrawerLayout.addDrawerListener(toggle);
+    }
 
 
-}
+    }
+
+
+
+
+

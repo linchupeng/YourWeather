@@ -27,6 +27,7 @@ import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.lcpdev.yourweather.gson.Forecast;
 import com.lcpdev.yourweather.gson.Weather;
+import com.lcpdev.yourweather.model.ActivityCollector;
 import com.lcpdev.yourweather.model.Common;
 import com.lcpdev.yourweather.util.HttpUtil;
 import com.lcpdev.yourweather.util.Utility;
@@ -39,9 +40,10 @@ import okhttp3.Response;
 
 import static android.R.attr.name;
 import static com.lcpdev.yourweather.R.layout.forecast;
+import static com.lcpdev.yourweather.model.Common.getDate;
 import static com.lcpdev.yourweather.model.DoubleClickExit.exitTime;
 
-public class WeatherActivity extends AppCompatActivity {
+public class WeatherActivity extends BaseActivity{
     private ScrollView scrWeatherLayout;
     private TextView tempText;
     private ImageView imgWeather;
@@ -64,24 +66,24 @@ public class WeatherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
         initView();
-        initToolBar();
+//        initToolBar();
     }
-    private void initToolBar() {
-        toolbarWeather = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbarWeather);
-
-        if (getSupportActionBar()!=null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            //去除默认Title显示
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-        }
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,mDrawerLayout,
-//                toolbarWeather,R.string.drawer_open,R.string.drawer_close);
-//        toggle.syncState();
-//        mDrawerLayout.addDrawerListener(toggle);
-
-
-    }
+//    private void initToolBar() {
+//        toolbarWeather = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbarWeather);
+//
+//        if (getSupportActionBar()!=null){
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            //去除默认Title显示
+//            getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        }
+////        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,mDrawerLayout,
+////                toolbarWeather,R.string.drawer_open,R.string.drawer_close);
+////        toggle.syncState();
+////        mDrawerLayout.addDrawerListener(toggle);
+//
+//
+//    }
 
     /**
      *初始化天气信息所需要的控件
@@ -142,7 +144,9 @@ public class WeatherActivity extends AppCompatActivity {
             TextView infoText = (TextView) view.findViewById(R.id.info_Text);
             TextView minText= (TextView) view.findViewById(R.id.min_Text);
             TextView maxText= (TextView) view.findViewById(R.id.max_Text);
-            dateText.setText(forecast.date);
+            String WeatherDate=forecast.date;
+            String weekDate = Common.getDate(WeatherDate);
+            dateText.setText(weekDate);
             infoText.setText(forecast.more.info);
             minText.setText(forecast.temperature.min+"℃");
             maxText.setText(forecast.temperature.max+"℃");
@@ -207,7 +211,7 @@ public class WeatherActivity extends AppCompatActivity {
             Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
             exitTime = System.currentTimeMillis();
         }else {
-            finish();
+            ActivityCollector.finishAll();
             System.exit(0);
 
         }
