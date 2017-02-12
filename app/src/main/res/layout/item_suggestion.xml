@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/cloth_brief"
+                    android:id="@+id/sug_comf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="舒适指数---"/>
@@ -60,7 +60,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@mipmap/sport"/>
+                android:src="@mipmap/air"/>
 
             <LinearLayout
                 android:layout_marginStart="64dp"
@@ -69,14 +69,14 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/sport_brief"
+                    android:id="@+id/sug_air"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="运动指数---"/>
+                    android:text="空气指数---"/>
 
                 <TextView
                     android:textSize="12sp"
-                    android:id="@+id/sport_txt"
+                    android:id="@+id/air_txt"
                     android:layout_marginTop="2dp"
                     android:textColor="#969696"
                     android:layout_width="wrap_content"
@@ -95,7 +95,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@mipmap/car"/>
+                android:src="@mipmap/flu"/>
 
             <LinearLayout
                 android:layout_marginStart="64dp"
@@ -104,14 +104,48 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/travel_brief"
+                    android:id="@+id/sug_flu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="洗车指数---"/>
+                    android:text="感冒指数---"/>
 
                 <TextView
                     android:textSize="12sp"
-                    android:id="@+id/car_txt"
+                    android:id="@+id/flu_txt"
+                    android:layout_marginTop="2dp"
+                    android:textColor="#969696"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@mipmap/clothe"/>
+
+            <LinearLayout
+                android:layout_marginStart="64dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/sug_drsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="穿衣指数---"/>
+
+                <TextView
+                    android:textSize="12sp"
+                    android:id="@+id/drsg_txt"
                     android:layout_marginTop="2dp"
                     android:textColor="#969696"
                     android:layout_width="wrap_content"

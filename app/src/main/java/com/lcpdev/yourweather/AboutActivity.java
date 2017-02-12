@@ -13,10 +13,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.lcpdev.yourweather.util.ToolBarActivity;
-
 /**
- * Created by linchupeng on 2017/2/4.
- * github:https://github.com/linchupeng/YourWeather
+ * Created by LCP on 2017/2/4.
+ * @ Email:chuge94@163.com
+ * GitHub:https://github.com/linchupeng/YourWeather
  */
 /**
  *Navigation功能之设置界面及功能的实现

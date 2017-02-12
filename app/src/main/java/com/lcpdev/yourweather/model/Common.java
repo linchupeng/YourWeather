@@ -1,21 +1,26 @@
 package com.lcpdev.yourweather.model;
 
 import android.icu.text.LocaleDisplayNames;
+import android.os.Process;
 import android.provider.ContactsContract;
+import android.support.v4.view.GravityCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 /**
- * Created by LinChuPeng on 2017/2/9.
+ * Created by LCP on 2017/2/9.
+ * @ Email:chuge94@163.com
  * GitHub:https://github.com/linchupeng/YourWeather
  */
 
 public class Common {
     public static final String CITYIDS="北京CN101010100上海CN101020100天津CN101030100重庆CN101040100"
-            +"福州CN101230101厦门CN101230401泉州CN101230501漳州CN101230601三明CN101230801宁德CN101230301南平CN101230901龙岩CN101230701莆田CN101230401"
+            +"福州CN101230101厦门CN101230201泉州CN101230501漳州CN101230601三明CN101230801宁德CN101230301南平CN101230901龙岩CN101230701莆田CN101230401"
             +"广州CN101280101韶关CN101280201梅州CN101280401汕头CN101280501深圳CN101280601珠海CN101280701佛山CN101280800肇庆CN101280901湛江CN101281001河源CN101281201清远CN101281301云浮CN101281401\n" +
             "潮州CN101281501东莞CN101281601中山CN101281701阳江CN101281801揭阳CN101281901茂名CN101282001汕尾CN101282101"
             +"昆明CN101290101大理CN101290201红河CN101290301曲靖CN101290401保山CN101290501文山CN101290601玉溪CN101290701楚雄CN101290801普洱CN101290901昭通CN101291001临沧CN101291101怒江CN101291201\n" +
@@ -63,7 +68,7 @@ public class Common {
         return weatherId;
     }
     /**
-     * 通过Gosn反馈回的日期转成对应星期，如果不存在则返回 null
+     * 通过Gosn反馈回来的日期转成对应星期，如果不存在则返回 null
      * @return weekDate;
      */
     public static String getDate(String WeatherDate) {
@@ -83,6 +88,7 @@ public class Common {
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
         String week = sdf.format(date);
         return week;
+
     }
 
 

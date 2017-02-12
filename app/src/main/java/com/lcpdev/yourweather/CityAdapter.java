@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by 林楚鹏 on 2017/1/20.
+ * Created by LCP on 2017/1/20.
+ * @ Email:chuge94@163.com
+ * GitHub:https://github.com/linchupeng/YourWeather
  */
 
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {

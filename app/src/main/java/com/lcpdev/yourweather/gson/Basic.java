@@ -2,11 +2,12 @@ package com.lcpdev.yourweather.gson;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by linchupeng on 2017/1/24.
- * github:https://github.com/linchupeng/YourWeather
- */
 
+/**
+ * Created by LCP on 2017/1/24.
+ * @ Email:chuge94@163.com
+ * GitHub:https://github.com/linchupeng/YourWeather
+ */
 public class Basic {
     @SerializedName("city")
     public String cityName;

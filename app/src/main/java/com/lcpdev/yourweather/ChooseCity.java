@@ -34,9 +34,10 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 /**
- * Created by 林楚鹏 on 2017/1/20.
+ * Created by LCP on 2017/1/20.
+ * @ Email:chuge94@163.com
+ * GitHub:https://github.com/linchupeng/YourWeather
  */
-
 public class ChooseCity extends BaseActivity {
     private RecyclerView recyclerView;
     public static final int LEVEL_PROVINCE = 0;

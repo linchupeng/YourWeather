@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+<!--<android.support.design.widget.CoordinatorLayout-->
+    <!--android:id="@+id/weather_ui"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_width="match_parent"-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android">-->
     <ScrollView
         android:id="@+id/weather_scrollView"
         android:layout_width="match_parent"
@@ -15,8 +25,19 @@
             android:layout_height="wrap_content">
             <include layout="@layout/toolbar"></include>
             <include layout="@layout/now"></include>
+            <include layout="@layout/hourlayout"></include>
             <include layout="@layout/forecast"></include>
             <include layout="@layout/item_suggestion"></include>
         </LinearLayout>
     </ScrollView>
-</android.support.design.widget.CoordinatorLayout>
+<!--</android.support.design.widget.CoordinatorLayout>-->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/nav_menu"
+        app:headerLayout="@layout/nav_header"
+        />
+
+</android.support.v4.widget.DrawerLayout>

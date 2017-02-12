@@ -45,9 +45,12 @@ import okhttp3.Response;
 import static android.R.attr.key;
 import static com.lcpdev.yourweather.model.Common.getCityIdByName;
 
+/**
+ * Created by LCP on 2017/1/16.
+ * @ Email:chuge94@163.com
+ * GitHub:https://github.com/linchupeng/YourWeather
+ */
 public class MainActivity extends BaseActivity {
-
-    public WeatherActivity weatherActivity = new WeatherActivity();
     private DrawerLayout mDrawerLayout;
     private List<City> cityList;
     public AMapLocationClient mLocationClient=null;
@@ -180,6 +183,7 @@ public class MainActivity extends BaseActivity {
         Intent intent =new Intent(MainActivity.this,WeatherActivity.class);
         intent.putExtra("weather_id",weatherId);
         startActivity(intent);
+        finish();
         }
 
     /**

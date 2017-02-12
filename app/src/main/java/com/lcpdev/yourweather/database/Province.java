@@ -2,10 +2,12 @@ package com.lcpdev.yourweather.database;
 
 import org.litepal.crud.DataSupport;
 
-/**
- * Created by 林楚鹏 on 2017/1/16.
- */
 
+/**
+ * Created by LCP on 2017/1/16.
+ * @ Email:chuge94@163.com
+ * GitHub:https://github.com/linchupeng/YourWeather
+ */
 public class Province extends DataSupport {
     private int id;
     private String provinceName;//省名

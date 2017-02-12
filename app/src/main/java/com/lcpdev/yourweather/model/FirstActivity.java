@@ -13,8 +13,9 @@ import com.lcpdev.yourweather.MainActivity;
 import com.lcpdev.yourweather.R;
 
 /**
- * Created by linchupeng on 2017/2/6.
- * github:https://github.com/linchupeng/YourWeather
+ * Created by LCP on 2017/2/6.
+ * @ Email:chuge94@163.com
+ * GitHub:https://github.com/linchupeng/YourWeather
  */
 
 public class FirstActivity extends Activity {

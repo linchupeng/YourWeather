@@ -1,8 +1,10 @@
 package com.lcpdev.yourweather.gson;
 
+
 /**
- * Created by linchupeng on 2017/1/24.
- * github:https://github.com/linchupeng/YourWeather
+ * Created by LCP on 2017/1/24.
+ * @ Email:chuge94@163.com
+ * GitHub:https://github.com/linchupeng/YourWeather
  */
 
 public class Aqi {
@@ -11,5 +13,6 @@ public class Aqi {
   public class AqiCity {
         public String aqi;
         public String pm25;
+        public String qlty;
     }
 }

@@ -7,18 +7,14 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@mipmap/empty"
     tools:openDrawer="start">
     <include layout="@layout/toolbar"></include>
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!--<include layout="@layout/activity_weather"></include>-->
     </android.support.design.widget.CoordinatorLayout>
-    <!--<include-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_width="match_parent"-->
-    <!--layout="@layout/choose_city">-->
-    <!--</include>-->
+
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="match_parent"

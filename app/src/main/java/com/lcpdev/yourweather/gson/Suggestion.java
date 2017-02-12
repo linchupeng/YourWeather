@@ -2,29 +2,46 @@ package com.lcpdev.yourweather.gson;
 
 import com.google.gson.annotations.SerializedName;
 
+
 /**
- * Created by linchupeng on 2017/1/27.
- * github:https://github.com/linchupeng/YourWeather
+ * Created by LCP on 2017/1/27.
+ * @ Email:chuge94@163.com
+ * GitHub:https://github.com/linchupeng/YourWeather
  */
 
 public class Suggestion {
+    @SerializedName("air")
+    public Air air;
     @SerializedName("comf")
     public Comfort comfort;
-    @SerializedName("cw")
-    public CarWash carWash;
-    public Sport sport;
+    @SerializedName("flu")
+    public Influenza flu;
+    public Dress drsg;
+    public class Air {
+        @SerializedName("brf")
+        public String info;
+        @SerializedName("txt")
+        public String infotxt;
+    }
     public class Comfort {
-        @SerializedName("txt")
+        @SerializedName("brf")
         public String info;
+        @SerializedName("txt")
+        public String infotxt;
+    }
+    public class Influenza {
+        @SerializedName("brf")
+        public String info;
+        @SerializedName("txt")
+        public String infotxt;
+    }
+    public class Dress {
+        @SerializedName("brf")
+        public String info;
+        @SerializedName("txt")
+        public String infotxt;
     }
 
-   public class CarWash {
-        @SerializedName("txt")
-        public String info;
-    }
 
-    public class Sport {
-        @SerializedName("txt")
-        public String info;
-    }
+
 }
