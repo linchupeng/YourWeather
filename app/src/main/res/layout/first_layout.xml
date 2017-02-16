@@ -1,9 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
-    android:background="@mipmap/splashscreen">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_splash"
+    android:background="@mipmap/splashscreen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/splashSun"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="65dp"
+        android:src="@mipmap/splashsun"
+        />
+
+    <ImageView
+        android:id="@+id/splashCloud1"
+        android:layout_width="135dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/splashSun"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="-60dp"
+        android:src="@mipmap/splashcloud1"
+        />
+
+    <ImageView
+        android:id="@+id/splashCould2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/splashSun"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="-60dp"
+        android:layout_marginTop="-60dp"
+        android:layout_toEndOf="@+id/splashCloud1"
+        android:src="@mipmap/splashcloud2"
+
+        />
+
+    <ImageView
+        android:id="@+id/splashCould3"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/splashSun"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="-30dp"
+        android:layout_marginTop="-55dp"
+        android:src="@mipmap/splashcloud3"/>
     <TextView
         android:id="@+id/countDown"
         android:layout_width="wrap_content"
@@ -13,3 +57,5 @@
         android:textSize="16sp"
         android:text="countDown"/>
 </RelativeLayout>
+
+

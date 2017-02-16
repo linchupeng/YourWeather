@@ -43,7 +43,7 @@ public class ChooseCity extends BaseActivity {
     public static final int LEVEL_PROVINCE = 0;
     public static final int LEVEL_CITY = 1;
     public static final int LEVEL_COUNTY = 2;
-    private TextView titleText;
+//    private TextView titleText;
     private ProgressDialog progressDialog;
     private List<String> dataList = new ArrayList<>();
     private CityAdapter mCityAdapter;
@@ -62,6 +62,7 @@ public class ChooseCity extends BaseActivity {
      * 当前选中的级别
      */
     private int currentLeveL;
+    private Toolbar toolbarTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,12 +102,12 @@ public class ChooseCity extends BaseActivity {
     }
 
     private void initToolbar() {
-        Toolbar toolbarTitle = (Toolbar) findViewById(R.id.toolbar);
+        toolbarTitle = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbarTitle);
         if (getSupportActionBar()!=null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             //去除默认Title显示
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
+//            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
         toolbarTitle.setNavigationOnClickListener(new View.OnClickListener() {
@@ -125,7 +126,6 @@ public class ChooseCity extends BaseActivity {
         queryProvince();
     }
     private void initView() {
-        titleText = (TextView) findViewById(R.id.toolbarCN);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -159,7 +159,7 @@ public class ChooseCity extends BaseActivity {
      * 查询省份
      */
     private void queryProvince() {
-        titleText.setText("中国");
+//        titleText.setText("中国");
         provinceList = DataSupport.findAll(Province.class);
         if (provinceList.size() > 0) {
             dataList.clear();
@@ -178,7 +178,7 @@ public class ChooseCity extends BaseActivity {
      * 查询城市
      */
     private void queryCity() {
-        titleText.setText(selectedProvince.getProvinceName());
+        toolbarTitle.setTitle(selectedProvince.getProvinceName());
         cityList = DataSupport.where("provinceid=?", String.valueOf(selectedProvince.getId())).find(City.class);
         if (cityList.size() > 0) {
             dataList.clear();
@@ -197,7 +197,7 @@ public class ChooseCity extends BaseActivity {
      * 查询县城
      */
     private void queryCounty() {
-        titleText.setText(selectedCity.getCityName());
+        toolbarTitle.setTitle(selectedCity.getCityName());
         countyList = DataSupport.where("cityid = ?", String.valueOf(selectedCity.getId())).find(County.class);
         if (countyList.size() > 0) {
             dataList.clear();

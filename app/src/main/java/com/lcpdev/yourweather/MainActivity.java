@@ -10,6 +10,8 @@ import android.os.Process;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -43,6 +45,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 import static android.R.attr.key;
+import static android.os.Build.VERSION_CODES.M;
 import static com.lcpdev.yourweather.model.Common.getCityIdByName;
 
 /**
@@ -53,6 +56,8 @@ import static com.lcpdev.yourweather.model.Common.getCityIdByName;
 public class MainActivity extends BaseActivity {
     private DrawerLayout mDrawerLayout;
     private List<City> cityList;
+    private FragmentManager manager;
+    private Toolbar indexToolBar;
     public AMapLocationClient mLocationClient=null;
     //声明mLocationOption对象
     public AMapLocationClientOption mLocationOption = null;
@@ -70,6 +75,7 @@ public class MainActivity extends BaseActivity {
                         String cityName = city.replace("市", "");
                         Log.i("定位成功", "当前城市为" + cityName);
                         queryWeatherCode(cityName);
+                        indexToolBar.setTitle(cityName);
                         Toast.makeText(MainActivity.this, cityName, Toast.LENGTH_SHORT).show();
                     }
 
@@ -102,9 +108,9 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initToolBar() {
-        Toolbar indexToolBar = (Toolbar) findViewById(R.id.toolbar);
+        indexToolBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(indexToolBar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,mDrawerLayout,
                 indexToolBar,R.string.drawer_open,R.string.drawer_close);
         toggle.syncState();
@@ -129,7 +135,11 @@ public class MainActivity extends BaseActivity {
                         Toast.makeText(MainActivity.this, "此功能再下个版本添加！", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.about:
-                        Intent intentSetting =new Intent(MainActivity.this,AboutActivity.class);
+                        Intent intentAbout =new Intent(MainActivity.this,AboutActivity.class);
+                        startActivity(intentAbout);
+                        break;
+                    case R.id.setting:
+                        Intent intentSetting =new Intent(MainActivity.this,SettingActivity.class);
                         startActivity(intentSetting);
                         break;
                     case R.id.exit:
@@ -180,10 +190,13 @@ public class MainActivity extends BaseActivity {
 //            e.printStackTrace();
 //        }
         String weatherId = Common.getCityIdByName(cityName);
-        Intent intent =new Intent(MainActivity.this,WeatherActivity.class);
-        intent.putExtra("weather_id",weatherId);
-        startActivity(intent);
-        finish();
+        WeatherFragment weatherFragment = new WeatherFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("weather_id",weatherId);
+        weatherFragment.setArguments(bundle);
+        manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.myCoor,weatherFragment).commit();
         }
 
     /**
@@ -203,7 +216,6 @@ public class MainActivity extends BaseActivity {
                 System.exit(0);
                 Process.killProcess(Process.myPid());
             }
-
         }
     }
 

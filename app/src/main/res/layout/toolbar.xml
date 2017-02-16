@@ -10,12 +10,5 @@
     android:layout_height="?attr/actionBarSize"
     android:background="@color/colorPrimaryDark"
     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-    <TextView
-        android:id="@+id/toolbarCN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/textColor"
-        android:text="你的天气"/>
 </android.support.v7.widget.Toolbar>
 </LinearLayout>

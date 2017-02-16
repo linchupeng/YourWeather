@@ -9,6 +9,7 @@
     android:paddingStart="24dp"
     android:paddingTop="32dp"
     android:weightSum="1">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,12 +18,13 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:drawablePadding="4dp"
             android:gravity="center"
             android:textColor="@color/aboutIcon"
-            android:text="很高兴认识你"
-            android:textSize="15sp"/>
+            android:drawableLeft="@mipmap/introduce"
+            android:text="@string/introduction"
+            android:textSize="16sp"/>
 
         <View
             android:layout_width="match_parent"
@@ -58,9 +60,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="4dp"
-
             android:gravity="center"
-            android:text="一切都很值得"
+            android:drawableLeft="@mipmap/hard"
+            android:text="一切值得"
             android:textColor="@color/aboutIcon"
             android:textSize="15sp"/>
         <View
@@ -85,7 +87,8 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:drawablePadding="12dp"
                 android:gravity="start|center_vertical"
-                android:text="查看项目源码"
+                android:drawableLeft="@mipmap/code"
+                android:text="@string/viewCode"
                 android:textColor="@color/defaultTextColor"
                 tools:targetApi="lollipop"
                 android:paddingEnd="12dp"
@@ -101,20 +104,22 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:drawablePadding="12dp"
                 android:gravity="start|center_vertical"
-                android:text="分享你的天气"
+                android:drawableLeft="@mipmap/share"
+                android:text="@string/shared"
                 android:textColor="@color/defaultTextColor"
                 tools:targetApi="lollipop"/>
             <Button
                 android:paddingEnd="12dp"
                 android:paddingStart="12dp"
-                android:id="@+id/btn_update"
+                android:id="@+id/btn_bullshit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:drawablePadding="12dp"
                 android:gravity="start|center_vertical"
-                android:text="检查软件更新"
+                android:drawableLeft="@mipmap/bullshit"
+                android:text="@string/bullshit"
                 android:textColor="@color/defaultTextColor"
                 tools:targetApi="lollipop"/>
 
@@ -128,7 +133,8 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:drawablePadding="12dp"
                 android:gravity="start|center_vertical"
-                android:text="作者交个朋友"
+                android:drawableLeft="@mipmap/friends"
+                android:text="@string/friends"
                 android:textColor="@color/defaultTextColor"
                 tools:targetApi="lollipop"/>
         </GridLayout>
@@ -151,9 +157,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="4dp"
-
+            android:drawableLeft="@mipmap/thanks"
             android:gravity="center"
-            android:text="感谢前辈的贡献"
+            android:text="感谢前辈"
             android:textColor="@color/aboutIcon"
             android:textSize="15sp"/>
         <View

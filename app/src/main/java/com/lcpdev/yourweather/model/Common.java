@@ -90,7 +90,11 @@ public class Common {
         return week;
 
     }
-
+    public static String getHour(String Hour){
+        String str = Hour;
+        String weatherHour = str.substring(10);
+        return weatherHour;
+    }
 
 
 }

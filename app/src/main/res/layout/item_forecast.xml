@@ -1,37 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_margin="15dp">
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="16dp"
+    android:paddingEnd="10dp"
+    android:paddingStart="16dp"
+    android:paddingTop="16dp">
+    <ImageView
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:src="@mipmap/week"/>
     <TextView
         android:id="@+id/date_Text"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="2"/>
+        android:layout_weight="1"
+        android:paddingLeft="10dp"
+        tools:text="星期一"
+        />
+    <ImageView
+        android:id="@+id/foreDayWeather"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:src="@mipmap/default_weathericon"/>
     <TextView
         android:id="@+id/info_Text"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:gravity="center"/>
+        android:paddingLeft="10dp"
+        tools:text="多云"/>
+
+    <ImageView
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:src="@mipmap/tmpdown"/>
     <TextView
         android:id="@+id/min_Text"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_weight="1"
-        android:gravity="right"/>
+        android:paddingLeft="10dp"
+        tools:text="5"/>
+    <ImageView
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:src="@mipmap/tmpup"/>
     <TextView
         android:id="@+id/max_Text"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_weight="1"
-        android:gravity="right"/>
-    </LinearLayout>
+        android:paddingLeft="10dp"
+        tools:text="20"/>
+ </LinearLayout>
+
 
 
 

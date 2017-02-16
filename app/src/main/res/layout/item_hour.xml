@@ -11,8 +11,8 @@
     android:paddingStart="16dp"
     android:paddingTop="16dp">
     <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
         android:src="@mipmap/clock"/>
     <TextView
         android:id="@+id/hour_clock"
@@ -23,8 +23,8 @@
         tools:text="12:00"
         />
     <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
         android:src="@mipmap/temp"/>
     <TextView
         android:id="@+id/hour_temp"
@@ -35,8 +35,8 @@
         tools:text="12°"/>
 
     <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
         android:src="@mipmap/hum"/>
     <TextView
         android:id="@+id/hour_hum"
@@ -49,8 +49,8 @@
 
 
     <ImageView
-        android:layout_width="22dp"
-        android:layout_height="22dp"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
         android:src="@mipmap/hourwindy"/>
     <TextView
         android:id="@+id/hour_wind"

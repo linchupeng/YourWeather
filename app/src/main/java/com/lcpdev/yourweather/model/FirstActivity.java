@@ -1,5 +1,6 @@
 package com.lcpdev.yourweather.model;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -7,10 +8,16 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lcpdev.yourweather.MainActivity;
 import com.lcpdev.yourweather.R;
+
+import static android.R.attr.width;
 
 /**
  * Created by LCP on 2017/2/6.
@@ -19,6 +26,10 @@ import com.lcpdev.yourweather.R;
  */
 
 public class FirstActivity extends Activity {
+    private ImageView splashSun;
+    private ImageView splashCould1;
+    private ImageView splashCould2;
+    private ImageView splashCould3;
     private TextView countDown;
     private MyCountDownTimer downTimer;
     @Override
@@ -26,9 +37,9 @@ public class FirstActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.first_layout);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE|View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        countDown= (TextView) findViewById(R.id.countDown);
-        downTimer =new MyCountDownTimer(3000,1000);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        initView();
+        downTimer = new MyCountDownTimer(4000, 1000);
         downTimer.start();
         handler.postDelayed(new Runnable() {
             @Override
@@ -37,9 +48,71 @@ public class FirstActivity extends Activity {
                 startActivity(intent);
                 FirstActivity.this.finish();
             }
-        },2000);
+        }, 1000);
     }
     private Handler handler =new Handler();
+
+    private void initView() {
+        splashSun= (ImageView) findViewById(R.id.splashSun);
+        splashCould1= (ImageView) findViewById(R.id.splashCloud1);
+        splashCould2= (ImageView) findViewById(R.id.splashCould2);
+        splashCould3= (ImageView) findViewById(R.id.splashCould3);
+        countDown= (TextView) findViewById(R.id.countDown);
+        // 需要在布局填充完成后才能获取到View的尺寸
+        getWindow().getDecorView().getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        playAnim();
+                        // 需要移除监听，否则会重复触发
+                        getWindow().getDecorView().getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
+    }
+
+    /**
+     * 设置动画属性 其中太阳360无限循环 云朵水平平移
+     */
+    private void playAnim() {
+        playSunAnim();
+        playCloud_1Anim();
+        playCloud_2Anim();
+        playCloud_3Anim();
+    }
+
+    private void playSunAnim() {
+        ObjectAnimator anim = ObjectAnimator.ofFloat(splashSun, "rotation", 0f, 360f);
+        anim.setRepeatMode(ObjectAnimator.RESTART);
+        anim.setRepeatCount(ObjectAnimator.INFINITE);
+        anim.setInterpolator(new LinearInterpolator());
+        anim.setDuration(30 * 1000);
+        anim.start();
+    }
+
+    private void playCloud_1Anim() {
+        float cloud1TranslationX = splashCould1.getTranslationX();
+        ObjectAnimator anim = ObjectAnimator.ofFloat(splashCould1, "translationX", cloud1TranslationX-250f,cloud1TranslationX);
+        anim.setDuration(8 * 1000);
+        anim.start();
+    }
+
+    private void playCloud_2Anim() {
+        float cloud2TranslationX = splashCould2.getTranslationX();
+        ObjectAnimator anim = ObjectAnimator.ofFloat(splashCould2, "translationX", cloud2TranslationX-200f, cloud2TranslationX);
+        anim.setDuration(7* 1000);
+        anim.start();
+    }
+
+    private void playCloud_3Anim() {
+        float cloud3TranslationX = splashCould3.getTranslationX();
+        ObjectAnimator anim = ObjectAnimator.ofFloat(splashCould3, "translationX",cloud3TranslationX,-300f,cloud3TranslationX);
+        anim.setDuration(8 * 1000);
+        anim.start();
+    }
+
+
+
+
 
     /**
      * 继承CountDownTimer 重写onTick，onFinish方法

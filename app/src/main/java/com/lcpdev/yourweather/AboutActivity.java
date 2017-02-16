@@ -55,7 +55,7 @@ public class AboutActivity extends BaseActivity {
         btn_code= (Button) findViewById(R.id.btn_code);
         btn_friends= (Button) findViewById(R.id.btn_friends);
         btn_shared= (Button) findViewById(R.id.btn_share);
-        btn_update= (Button) findViewById(R.id.btn_update);
+        btn_update= (Button) findViewById(R.id.btn_bullshit);
         btn_update.setOnClickListener(new BtnListener());
         btn_shared.setOnClickListener(new BtnListener());
         btn_friends.setOnClickListener(new BtnListener());

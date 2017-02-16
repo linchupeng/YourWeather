@@ -30,7 +30,8 @@
         </meta-data>
         <service android:name="com.amap.api.location.APSService">
         </service>
-        <activity android:name=".model.FirstActivity">
+        <activity android:name=".model.FirstActivity"
+            android:theme="@style/FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -42,9 +43,9 @@
         <activity android:name=".WeatherActivity">
         </activity>
         <activity
-            android:name=".AboutActivity"
-            >
+            android:name=".AboutActivity">
         </activity>
+        <activity android:name=".SettingActivity"></activity>
 
     </application>
 
