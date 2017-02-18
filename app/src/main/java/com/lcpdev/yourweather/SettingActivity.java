@@ -2,6 +2,8 @@ package com.lcpdev.yourweather;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -40,12 +42,12 @@ public class SettingActivity extends PreferenceActivity {
     private void initView() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+        mToolbar.setTitleTextColor(Color.WHITE);
         delegate.getSupportActionBar().setDisplayShowTitleEnabled(false);
         delegate.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(SettingActivity.this, "点击", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -58,8 +60,6 @@ public class SettingActivity extends PreferenceActivity {
 
     private void setToolbar() {
         mToolbar.setTitle("设置");
-//        toolbarTitle.setText("设置");
-
     }
 
     private void initFragment() {
@@ -98,7 +98,7 @@ public class SettingActivity extends PreferenceActivity {
                             .build();
                     manager.notify(1,notification);
                     Toast.makeText(getActivity(), "通知栏", Toast.LENGTH_SHORT).show();
-                    return false;
+                    return true;
                 }
             });
         }

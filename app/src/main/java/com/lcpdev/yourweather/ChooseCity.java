@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -70,30 +72,31 @@ public class ChooseCity extends BaseActivity {
         setContentView(R.layout.choose_city);
         initView();
         initToolbar();
+        Log.d("LifeCycle","ChooseActivity_onCreate");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d(" ChooseCity","onStart");
+        Log.d("LifeCycle","ChooseActivity_onStart");
     }
 
     @Override
     protected void onResume() {
         super.onPostResume();
-        Log.d(" ChooseCity","onResume");
+        Log.d("LifeCycle","ChooseActivity_onResume");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(" ChooseCity","onPause");
+        Log.d("LifeCycle","ChooseActivity_onPause");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(" ChooseCity","onStop");
+        Log.d("LifeCycle","ChooseActivity_onStop");
     }
 
     @Override
@@ -144,9 +147,8 @@ public class ChooseCity extends BaseActivity {
                     queryCounty();
                 }else if (currentLeveL == LEVEL_COUNTY){
                     String weatherId = countyList.get(position).getWeatherId();
-                    Intent intent =new Intent(ChooseCity.this,WeatherActivity.class);
+                    Intent intent =new Intent(ChooseCity.this,MainActivity.class);
                     intent.putExtra("weather_id",weatherId);
-                    Log.d("weatherID",weatherId);
                     startActivity(intent);
                     finish();
                 }
@@ -159,7 +161,6 @@ public class ChooseCity extends BaseActivity {
      * 查询省份
      */
     private void queryProvince() {
-//        titleText.setText("中国");
         provinceList = DataSupport.findAll(Province.class);
         if (provinceList.size() > 0) {
             dataList.clear();
@@ -291,7 +292,7 @@ public class ChooseCity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d("chooseActivity","onDestroy");
+        Log.d("LifeCycle","ChooseActivity_onDestroy");
     }
 }
 

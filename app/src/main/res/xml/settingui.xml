@@ -8,6 +8,7 @@
             />
         <Preference
             android:key="update_version"
-            android:title="检查更新"/>
+            android:title="检查更新"
+            android:summary="Version 1.0"/>
     </PreferenceCategory>
 </PreferenceScreen>

@@ -55,46 +55,14 @@ import static com.lcpdev.yourweather.model.Common.getCityIdByName;
  */
 public class MainActivity extends BaseActivity {
     private DrawerLayout mDrawerLayout;
-    private List<City> cityList;
+//    private List<City> cityList;
     private FragmentManager manager;
     private Toolbar indexToolBar;
     public AMapLocationClient mLocationClient=null;
     //声明mLocationOption对象
     public AMapLocationClientOption mLocationOption = null;
-    public AMapLocationListener mLocationListener=new AMapLocationListener() {
-        @Override public void onLocationChanged(AMapLocation amapLocation) {
-            if(amapLocation!=null){
-                if(amapLocation.getErrorCode()==0) {
-                    //定位成功回调信息，设置相关消息
-                    amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
-                    amapLocation.getLatitude();//获取纬度
-                    amapLocation.getLongitude();//获取经度
-                    amapLocation.getAccuracy();//获取精度信息
-                    String city = amapLocation.getCity();
-                    if (!TextUtils.isEmpty(city)) {
-                        String cityName = city.replace("市", "");
-                        Log.i("定位成功", "当前城市为" + cityName);
-                        queryWeatherCode(cityName);
-                        indexToolBar.setTitle(cityName);
-                        Toast.makeText(MainActivity.this, cityName, Toast.LENGTH_SHORT).show();
-                    }
-
-                }else {
-                    //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
-                        Log.e("aMapError", "ErrCode:" + amapLocation.getErrorCode()
-                                + ", errInfo:" + amapLocation.getErrorInfo());
-                        Log.e("定位失败","");
-                    Toast.makeText(MainActivity.this, "糟糕定位失败〒_〒", Toast.LENGTH_SHORT).show();
-                }
-                        //停止定位
-                        mLocationClient.stopLocation();
-                        //销毁定位
-                        mLocationClient.onDestroy();
-             }
-         }
-     };
-
-
+    private String weatherId;
+    private AMapLocationListener mLocationListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,8 +70,70 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         initNavigation();
         initToolBar();
+        initAMapLocationListener();
         initLocation();
+//        if (savedInstanceState==null){
+//            weatherFragment = new WeatherFragment();
+//        }
+        Log.d("LifeCycle","MainActivity_OnCreate");
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("LifeCycle","MainActivity_OnStart");
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.d("LifeCycle","MainActivity_OnResume");
+    }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("LifeCycle","MainActivity_OnRestart");
+    }
+
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("LifeCycle","MainActivity_OnPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("LifeCycle","MainActivity_OnStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("LifeCycle","MainActivity_OnDestroy");
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        String weatherId = getIntent().getStringExtra("weather_id");
+        if (weatherId!=null){
+            WeatherFragment weatherFrag= new WeatherFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("weather_id", weatherId);
+            weatherFrag.setArguments(bundle);
+            manager = getSupportFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.myCoor, weatherFrag).commit();
+        }
+
+        Log.d("LifeCycle", "MainActivity_OnResume");
 
     }
 
@@ -150,7 +180,47 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    /**
+     * 获取高德地图定位城市
+     */
+    private void initAMapLocationListener() {
+        mLocationListener=new AMapLocationListener() {
+            @Override public void onLocationChanged(AMapLocation amapLocation) {
+                if(amapLocation!=null){
+                    if(amapLocation.getErrorCode()==0) {
+                        //定位成功回调信息，设置相关消息
+                        amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
+                        amapLocation.getLatitude();//获取纬度
+                        amapLocation.getLongitude();//获取经度
+                        amapLocation.getAccuracy();//获取精度信息
+                        String city = amapLocation.getCity();
+                        if (!TextUtils.isEmpty(city)) {
+                            String cityName = city.replace("市", "");
+                            Log.i("定位成功", "当前城市为" + cityName);
+                            queryWeatherCode(cityName);
+//                            indexToolBar.setTitle(cityName);
+                            Toast.makeText(MainActivity.this, "当前城市"+cityName, Toast.LENGTH_SHORT).show();
+                        }
 
+                    }else {
+                        //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
+                        Log.e("aMapError", "ErrCode:" + amapLocation.getErrorCode()
+                                + ", errInfo:" + amapLocation.getErrorInfo());
+                        Log.e("定位失败","");
+                        Toast.makeText(MainActivity.this, "定位失败加载默认城市〒_〒", Toast.LENGTH_SHORT).show();
+                        //定位失败加载默认城市
+                        String cityName = "厦门";
+                        queryWeatherCode(cityName);
+//                        indexToolBar.setTitle(cityName);
+                    }
+                    //停止定位
+                    mLocationClient.stopLocation();
+                    //销毁定位
+                    mLocationClient.onDestroy();
+                }
+            }
+        };
+    }
 
     /**
      * 初始化高德地图定位参数
@@ -183,22 +253,24 @@ public class MainActivity extends BaseActivity {
      */
     private void queryWeatherCode(String cityName) {
 //        try {
-//            String str = new String(cityName.getBytes(), "UTF-8");
-//            cityName = URLEncoder.encode(str, "UTF-8");
-//        } catch (Exception e) {
-//
+////            String str = new String(cityName.getBytes(), "UTF-8");
+////            cityName = URLEncoder.encode(str, "UTF-8");
+////        } catch (Exception e) {
+////
 //            e.printStackTrace();
-//        }
-        String weatherId = Common.getCityIdByName(cityName);
-        WeatherFragment weatherFragment = new WeatherFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("weather_id",weatherId);
-        weatherFragment.setArguments(bundle);
-        manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.myCoor,weatherFragment).commit();
-        }
 
+        weatherId = Common.getCityIdByName(cityName);
+        if (weatherId != null) {
+            WeatherFragment weatherFragment = new WeatherFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("weather_id", weatherId);
+            weatherFragment.setArguments(bundle);
+            manager = getSupportFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.add(R.id.myCoor, weatherFragment).commit();
+//            }
+        }
+    }
     /**
      * 点击返回键两次退出程序
      */

@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="4dp"
             android:gravity="center"
-            android:drawableLeft="@mipmap/hard"
+            android:drawableLeft="@mipmap/pen"
             android:text="一切值得"
             android:textColor="@color/aboutIcon"
             android:textSize="15sp"/>

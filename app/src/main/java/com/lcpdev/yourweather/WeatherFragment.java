@@ -1,10 +1,14 @@
 package com.lcpdev.yourweather;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -22,6 +27,7 @@ import com.lcpdev.yourweather.gson.Forecast;
 import com.lcpdev.yourweather.gson.HourForecast;
 import com.lcpdev.yourweather.gson.Weather;
 import com.lcpdev.yourweather.model.Common;
+import com.lcpdev.yourweather.service.AutoUpdateService;
 import com.lcpdev.yourweather.util.HttpUtil;
 import com.lcpdev.yourweather.util.Utility;
 
@@ -32,6 +38,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 import static com.lcpdev.yourweather.R.id.airQlty;
+import static com.lcpdev.yourweather.R.id.weather_scrollView;
 
 /**
  * Created by linchupeng on 2017/2/14.
@@ -39,7 +46,7 @@ import static com.lcpdev.yourweather.R.id.airQlty;
  */
 
 public class WeatherFragment extends Fragment {
-
+    public SwipeRefreshLayout swipeRefresh;
     private ScrollView scrWeatherLayout;
     private TextView tempText;
     private ImageView imgWeather;
@@ -57,13 +64,35 @@ public class WeatherFragment extends Fragment {
     private TextView dressTxt;
     private LinearLayout hourforecastLayout;
     private LinearLayout forecastLayout;
-//    public SwipeRefreshLayout swipeRefresh;
+//    private String weatherId;
+    private Toolbar mToolbar;
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity){
+            MainActivity mainActivity = (MainActivity) context;
+            mToolbar= (Toolbar) mainActivity.findViewById(R.id.toolbar);
+        }
+        Log.d("LifeCycle","WeatherFragment_onAttach");
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d("LifeCycle","WeatherFragment_onCreate");
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.activity_weather,container,false);
+        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipe_layout);
+//        swipeRefresh.getResources().getColor(R.color.colorPrimary,Theme.AppCompat.DayNight.NoActionBar);
         scrWeatherLayout = (ScrollView)view.findViewById(R.id.weather_scrollView);
-//        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh);
         tempText = (TextView) view.findViewById(R.id.temp);
         imgWeather= (ImageView)view.findViewById(R.id.img_cond);
         weatherInfoText = (TextView)view.findViewById(R.id.weather_info);
@@ -82,34 +111,50 @@ public class WeatherFragment extends Fragment {
         dressTxt = (TextView)view.findViewById(R.id.drsg_txt);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         final String weatherString = prefs.getString("Weather", null);
-//        swipeRefresh.setColorSchemeColors(getResources().getColor(R.color.colorPrimaryDark,App));
-
-
-//        final String swipeWeatherId;
+        final String weatherId ;
         if (weatherString != null) {
             //有缓存时直接解析天气
             Weather weather = Utility.handleWeatherResponse(weatherString);
-//            swipeWeatherId = weather.basic.weatherId;
+//            weatherId = weather.basic.weatherId;
             showWeatherInfo(weather);
         } else {
             //无缓存时去服务器查询天气
-            String weatherId = (String) getArguments().get("weather_id");
-//            String swipeWeatherId =(String) getArguments().get("weather_id");
-//            String weatherId = getIntent().getStringExtra("weather_id");
+            weatherId = (String) getArguments().get("weather_id");
             scrWeatherLayout.setVisibility(View.INVISIBLE);
-            requestWeather(weatherId);
-            Log.d("weatherActivity_ID",weatherId);
+            if (weatherId !=null) {
+                requestWeather(weatherId);
+//            Log.d("weatherActivity_ID",weatherId);
+            }
+            swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    requestWeather(weatherId);
+                }
+            });
+
         }
-//        swipeRefresh.setOnClickListener(new SwipeRefreshLayout.OnRefreshListener() {
-//
-//            @Override
-//            public void onRefresh() {
-//              requestWeather(swipeWeatherId);
-//            }
-//        });
-
-
+        Log.d("LifeCycle","WeatherFragment_onCreateView");
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        String weatherId = getActivity().getIntent().getStringExtra("weather_id");
+        if (weatherId!=null){
+            requestWeather(weatherId);
+        }else {
+            Log.d("LifeCycle","WeatherId is null");
+        }
+        Log.d("LifeCycle","WeatherFragment_onResume");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+//        weatherId=null;
+        Log.d("LifeCycle","WeatherFragment_onDetach");
+
     }
 
     private void showWeatherInfo(Weather weather) {
@@ -118,7 +163,7 @@ public class WeatherFragment extends Fragment {
         String weatherInfo = weather.now.more.info;
         int imgCode = weather.now.more.code;
         tempText.setText(temp);
-//        titleCityName.setText(cityName);
+        mToolbar.setTitle(cityName);
         weatherInfoText.setText(weatherInfo);
         if (imgCode == 100) {
             imgWeather.setImageResource(R.mipmap.sun);
@@ -176,22 +221,22 @@ public class WeatherFragment extends Fragment {
             //日期转换星期
             String weekDate = Common.getDate(WeatherDate);
             dateText.setText(weekDate);
-//            int foreCode  = forecast.more.foreCode;
-//            if (foreCode >= 100 && foreCode <= 103  ){
-//                forecastImg.setImageResource(R.mipmap.foredaysun);
-//            }
-//            if ((foreCode >= 104 && foreCode <= 213)||(foreCode >= 500 && foreCode <= 502)){
-//                forecastImg.setImageResource(R.mipmap.foredaycloud);
-//            }
-//            if (foreCode >= 300 && foreCode <= 313 ){
-//                forecastImg.setImageResource(R.mipmap.foredayrain);
-//            }
-//            if (foreCode >= 400 && foreCode <=407 ){
-//                forecastImg.setImageResource(R.mipmap.foredaysnow);
-//            }
-//            if (foreCode >=503 && foreCode <= 508){
-//                forecastImg.setImageResource(R.mipmap.foredaysand);
-//            }
+            int foreCode  = forecast.more.foreCode;
+            if (foreCode >= 100 && foreCode <= 103  ){
+                forecastImg.setImageResource(R.mipmap.foredaysun);
+            }
+            if ((foreCode >= 104 && foreCode <= 213)||(foreCode >= 500 && foreCode <= 502)){
+                forecastImg.setImageResource(R.mipmap.foredaycloud);
+            }
+            if (foreCode >= 300 && foreCode <= 313 ){
+                forecastImg.setImageResource(R.mipmap.foredayrain);
+            }
+            if (foreCode >= 400 && foreCode <=407 ){
+                forecastImg.setImageResource(R.mipmap.foredaysnow);
+            }
+            if (foreCode >=503 && foreCode <= 508){
+                forecastImg.setImageResource(R.mipmap.foredaysand);
+            }
             infoText.setText(forecast.more.info);
             minText.setText(forecast.temperature.min+"℃");
             maxText.setText(forecast.temperature.max+"℃");
@@ -221,6 +266,7 @@ public class WeatherFragment extends Fragment {
         scrWeatherLayout.setVisibility(View.VISIBLE);
     }
     public void requestWeather( String weatherId) {
+//        Log.d("LifeCycle",weatherId);
         String weatherUrl = "https://api.heweather.com/v5/weather?city="+weatherId+"&key=342a3bf415f84fc7ba09cf90e66fcee1";
         Log.i("天气详情", weatherUrl);
         HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
@@ -231,6 +277,7 @@ public class WeatherFragment extends Fragment {
                     @Override
                     public void run() {
                         Toast.makeText(getActivity(), "一不小心获取失败了Q_Q ", Toast.LENGTH_SHORT).show();
+                        swipeRefresh.setRefreshing(false);
                     }
                 });
             }
@@ -248,13 +295,15 @@ public class WeatherFragment extends Fragment {
                             editor.putString("weather", responseText);
                             editor.apply();
                             showWeatherInfo(weather);
+                            Intent intentAutoService = new Intent(getActivity(), AutoUpdateService.class);
+                            getActivity().startService(intentAutoService);
                         } else {
                             Toast.makeText(getActivity(), "后台获取天气失败( >﹏< )", Toast.LENGTH_SHORT).show();
+                            swipeRefresh.setRefreshing(false);
                         }
                     }
                 });
             }
         });
-
     }
 }
