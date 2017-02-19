@@ -66,7 +66,7 @@ public class WeatherFragment extends Fragment {
     private LinearLayout forecastLayout;
 //    private String weatherId;
     private Toolbar mToolbar;
-
+    private String weatherId;
 
     @Override
     public void onAttach(Context context) {
@@ -109,30 +109,51 @@ public class WeatherFragment extends Fragment {
         comfortTxt = (TextView)view.findViewById(R.id.comf_txt);
         influenzaTxt = (TextView)view.findViewById(R.id.flu_txt);
         dressTxt = (TextView)view.findViewById(R.id.drsg_txt);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        final String weatherString = prefs.getString("Weather", null);
-        final String weatherId ;
-        if (weatherString != null) {
-            //有缓存时直接解析天气
-            Weather weather = Utility.handleWeatherResponse(weatherString);
-//            weatherId = weather.basic.weatherId;
-            showWeatherInfo(weather);
-        } else {
-            //无缓存时去服务器查询天气
-            weatherId = (String) getArguments().get("weather_id");
+/**
+ * 这个目前有Bug跟定位冲突就不去实现了
+ */
+//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//        final String weatherString = prefs.getString("Weather", null);
+//        final String weatherId ;
+//        if (weatherString != null) {
+//            //有缓存时直接解析天气
+//            Weather weather = Utility.handleWeatherResponse(weatherString);
+////            weatherId = weather.basic.weatherId;
+//            showWeatherInfo(weather);
+//        } else {
+//            //无缓存时去服务器查询天气
+//            weatherId = (String) getArguments().get("weather_id");
+//            scrWeatherLayout.setVisibility(View.INVISIBLE);
+//            if (weatherId !=null) {
+//                requestWeather(weatherId);
+////            Log.d("weatherActivity_ID",weatherId);
+//            }
+//            swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//                @Override
+//                public void onRefresh() {
+//                    requestWeather(weatherId);
+//                }
+//            });
+//        }
+        weatherId = (String) getArguments().get("weather_id");
             scrWeatherLayout.setVisibility(View.INVISIBLE);
             if (weatherId !=null) {
                 requestWeather(weatherId);
 //            Log.d("weatherActivity_ID",weatherId);
             }
-            swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
-                    requestWeather(weatherId);
+                    if (weatherId!=null){
+                        requestWeather(weatherId);
+                        Toast.makeText(getActivity(), "更新成功( •̀ .̫ •́ )✧", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Log.d("LifeCycle","swipeWeatherId is null");
+                    }
+
                 }
             });
-
-        }
         Log.d("LifeCycle","WeatherFragment_onCreateView");
         return view;
     }
@@ -162,6 +183,11 @@ public class WeatherFragment extends Fragment {
         String temp = weather.now.temperature + "℃";
         String weatherInfo = weather.now.more.info;
         int imgCode = weather.now.more.code;
+        SharedPreferences.Editor editor = getActivity().getSharedPreferences("notification",Context.MODE_PRIVATE).edit();
+        editor.putString("cityName", cityName);
+        editor.putString("temperature",temp);
+        editor.putString("weatherInfo",weatherInfo);
+        editor.apply();
         tempText.setText(temp);
         mToolbar.setTitle(cityName);
         weatherInfoText.setText(weatherInfo);
@@ -299,11 +325,12 @@ public class WeatherFragment extends Fragment {
                             getActivity().startService(intentAutoService);
                         } else {
                             Toast.makeText(getActivity(), "后台获取天气失败( >﹏< )", Toast.LENGTH_SHORT).show();
-                            swipeRefresh.setRefreshing(false);
                         }
+                        swipeRefresh.setRefreshing(false);
                     }
                 });
             }
         });
     }
+
 }
