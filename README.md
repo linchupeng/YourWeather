@@ -1,12 +1,19 @@
-# YourWeather
+# YourWeather(你的天气)
+
+该项目是自己通过自学Android的一次简单作品尝试，在《第一行代码》第二版的基础上重新构架和布局，添加如定位和通知栏的一些功能。
+分享给和我一样还在初学也不肯在这条道路上放弃的我们。希望能给你带来一些参考
+
 你的天气是一款简单而又不简约的天气应用 没有过多的权限和常驻内存
+
 1.	开发工具 : AndroidStudio + Git
 2.	基于Android5.0开发，遵循Material Design设计规范
 3.	DrawerLayout，NavigationView，ToolBar，Fragment，CardView 实现主要UI布局
 4.	使用开源库okhttp3请求网络数据，天气API接口为和风天气提供
 5.	使用Gosn 解析获取天气数据
 6.	使用高德地图API定位城市
+
 实现功能 :
+
 1.	初始页自动定位城市并且显示天气详情
 2.	查询全国城市（包括县）的天气信息
 3.	实现未来三天的天气情况
