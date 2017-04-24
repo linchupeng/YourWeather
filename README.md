@@ -3,8 +3,9 @@
 该项目是自己通过自学Android的一次简单作品尝试，在《第一行代码》第二版的基础上重新构架和布局，添加如定位和通知栏的一些功能。
 分享给和我一样还在初学也不肯在这条道路上放弃的我们。希望能给你带来一些参考
 
-你的天气是一款简单而又不简约的天气应用 没有过多的权限和常驻内存
-[http://sj.qq.com/myapp/detail.htm?apkName=com.lcpdev.yourweather](http://sj.qq.com/myapp/detail.htm?apkName=com.lcpdev.yourweather)
+你的天气是一款简单而又不简约的天气应用 没有过多的权限和常驻内存<br />
+
+[http://sj.qq.com/myapp/detail.htm?apkName=com.lcpdev.yourweather](http://sj.qq.com/myapp/detail.htm?apkName=com.lcpdev.yourweather)<br />
 
 1.	开发工具 : AndroidStudio + Git
 2.	基于Android5.0开发，遵循Material Design设计规范
