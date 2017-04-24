@@ -5,10 +5,10 @@
 
 你的天气是一款简单而又不简约的天气应用 没有过多的权限和常驻内存<br />
 
-### 下载地址:
+### 下载地址 :
 [http://sj.qq.com/myapp/detail.htm?apkName=com.lcpdev.yourweather](http://sj.qq.com/myapp/detail.htm?apkName=com.lcpdev.yourweather)<br />
 
-### 说明
+### 说明 :
 1.	开发工具 : AndroidStudio + Git
 2.	基于Android5.0开发，遵循Material Design设计规范
 3.	DrawerLayout，NavigationView，ToolBar，Fragment，CardView 实现主要UI布局
@@ -26,6 +26,6 @@
 6.	实现通知栏显示天气主要信息
 7.	手动更新和后台自动更新天气信息
 
-### 效果图
+### 效果图 :
 
 ![](https://github.com/linchupeng/YourWeather/blob/master/images/detail.png)
