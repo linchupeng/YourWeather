@@ -27,3 +27,5 @@
 7.	手动更新和后台自动更新天气信息
 
 ### 效果图
+
+![](https://github.com/linchupeng/YourWeather/blob/master/images/detail.png)
