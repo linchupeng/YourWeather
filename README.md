@@ -5,7 +5,7 @@
 
 你的天气是一款简单而又不简约的天气应用 没有过多的权限和常驻内存<br />
 
-[http://sj.qq.com/myapp/detail.htm?apkName=com.lcpdev.yourweather](http://sj.qq.com/myapp/detail.htm?apkName=com.lcpdev.yourweather)<br />
+下载地址:[http://sj.qq.com/myapp/detail.htm?apkName=com.lcpdev.yourweather](http://sj.qq.com/myapp/detail.htm?apkName=com.lcpdev.yourweather)<br />
 
 1.	开发工具 : AndroidStudio + Git
 2.	基于Android5.0开发，遵循Material Design设计规范
