@@ -72,9 +72,7 @@ public class MainActivity extends BaseActivity {
         initToolBar();
         initAMapLocationListener();
         initLocation();
-//        if (savedInstanceState==null){
-//            weatherFragment = new WeatherFragment();
-//        }
+
         Log.d("LifeCycle","MainActivity_OnCreate");
     }
 
@@ -118,6 +116,10 @@ public class MainActivity extends BaseActivity {
         Log.d("LifeCycle","MainActivity_OnDestroy");
     }
 
+    /**
+     * singleTask启动模式 复写onNewIntent方法 传递数据
+     * 重用了WeatherFragment 
+     */
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -198,7 +200,7 @@ public class MainActivity extends BaseActivity {
                             String cityName = city.replace("市", "");
                             Log.i("定位成功", "当前城市为" + cityName);
                             queryWeatherCode(cityName);
-//                            indexToolBar.setTitle(cityName);
+
                             Toast.makeText(MainActivity.this, "当前城市"+cityName, Toast.LENGTH_SHORT).show();
                         }
 
@@ -211,7 +213,7 @@ public class MainActivity extends BaseActivity {
                         //定位失败加载默认城市
                         String cityName = "厦门";
                         queryWeatherCode(cityName);
-//                        indexToolBar.setTitle(cityName);
+
                     }
                     //停止定位
                     mLocationClient.stopLocation();
@@ -252,12 +254,6 @@ public class MainActivity extends BaseActivity {
      * 转换城市编码
      */
     private void queryWeatherCode(String cityName) {
-//        try {
-////            String str = new String(cityName.getBytes(), "UTF-8");
-////            cityName = URLEncoder.encode(str, "UTF-8");
-////        } catch (Exception e) {
-////
-//            e.printStackTrace();
 
         weatherId = Common.getCityIdByName(cityName);
         if (weatherId != null) {

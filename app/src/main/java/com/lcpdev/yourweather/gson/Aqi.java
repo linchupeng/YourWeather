@@ -7,6 +7,11 @@ package com.lcpdev.yourweather.gson;
  * GitHub:https://github.com/linchupeng/YourWeather
  */
 
+/**
+  * aqi 表示aqi指数 
+  * pm25 表示pm2.5指数
+  * qlty 表示空气质量
+  */
 public class Aqi {
     public AqiCity city;
 

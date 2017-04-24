@@ -9,6 +9,11 @@ import com.google.gson.annotations.SerializedName;
  * GitHub:https://github.com/linchupeng/YourWeather
  */
 
+
+    /**
+     *天气指数的生活建议包括(空气，舒适，感冒，穿衣)
+     */
+
 public class Suggestion {
     @SerializedName("air")
     public Air air;

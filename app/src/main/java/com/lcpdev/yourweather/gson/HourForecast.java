@@ -7,14 +7,18 @@ import com.google.gson.annotations.SerializedName;
  * github:https://github.com/linchupeng/YourWeather
  */
 
+	/**
+	 * 未来小时的天气信息
+	 */
 public class HourForecast {
     public String date;
     public String hum;
     public String tmp;
-    @SerializedName("wind")
+    @SerializedName("wind")  // 风向
     public Wind wind;
 
     public class Wind {
-        public String spd;
+        public String spd; // 风速
     }
 }
+

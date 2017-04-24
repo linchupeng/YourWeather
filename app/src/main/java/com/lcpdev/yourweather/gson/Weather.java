@@ -9,7 +9,10 @@ import java.util.List;
  * @ Email:chuge94@163.com
  * GitHub:https://github.com/linchupeng/YourWeather
  */
-
+/**
+ *建立Weather类 实现对Aqi Basic Now Suggestion 类的引用(由于hourly_forecast
+ *daily_forecast 包含数组 所以用List集合来引用HourForecast和Forecast类的引用 )
+ */
 public class Weather {
     public String status;
     public Aqi aqi;

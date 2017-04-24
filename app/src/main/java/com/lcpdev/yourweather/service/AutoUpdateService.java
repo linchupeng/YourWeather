@@ -29,7 +29,8 @@ public class AutoUpdateService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {return null;}
-
+    
+    //onStartCommand()方法调用updateWeather()更新天气
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         updateWeather();

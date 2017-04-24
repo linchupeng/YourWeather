@@ -64,13 +64,14 @@ public class WeatherFragment extends Fragment {
     private TextView dressTxt;
     private LinearLayout hourforecastLayout;
     private LinearLayout forecastLayout;
-//    private String weatherId;
     private Toolbar mToolbar;
     private String weatherId;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        //得到宿主Activity的ToolBar
+
         if (context instanceof MainActivity){
             MainActivity mainActivity = (MainActivity) context;
             mToolbar= (Toolbar) mainActivity.findViewById(R.id.toolbar);
@@ -91,7 +92,6 @@ public class WeatherFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.activity_weather,container,false);
         swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipe_layout);
-//        swipeRefresh.getResources().getColor(R.color.colorPrimary,Theme.AppCompat.DayNight.NoActionBar);
         scrWeatherLayout = (ScrollView)view.findViewById(R.id.weather_scrollView);
         tempText = (TextView) view.findViewById(R.id.temp);
         imgWeather= (ImageView)view.findViewById(R.id.img_cond);
@@ -109,38 +109,14 @@ public class WeatherFragment extends Fragment {
         comfortTxt = (TextView)view.findViewById(R.id.comf_txt);
         influenzaTxt = (TextView)view.findViewById(R.id.flu_txt);
         dressTxt = (TextView)view.findViewById(R.id.drsg_txt);
-/**
- * 这个目前有Bug跟定位冲突就不去实现了
- */
-//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//        final String weatherString = prefs.getString("Weather", null);
-//        final String weatherId ;
-//        if (weatherString != null) {
-//            //有缓存时直接解析天气
-//            Weather weather = Utility.handleWeatherResponse(weatherString);
-////            weatherId = weather.basic.weatherId;
-//            showWeatherInfo(weather);
-//        } else {
-//            //无缓存时去服务器查询天气
-//            weatherId = (String) getArguments().get("weather_id");
-//            scrWeatherLayout.setVisibility(View.INVISIBLE);
-//            if (weatherId !=null) {
-//                requestWeather(weatherId);
-////            Log.d("weatherActivity_ID",weatherId);
-//            }
-//            swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//                @Override
-//                public void onRefresh() {
-//                    requestWeather(weatherId);
-//                }
-//            });
-//        }
+
         weatherId = (String) getArguments().get("weather_id");
             scrWeatherLayout.setVisibility(View.INVISIBLE);
             if (weatherId !=null) {
                 requestWeather(weatherId);
-//            Log.d("weatherActivity_ID",weatherId);
+
             }
+            //刷新控件的实现
 
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
@@ -183,6 +159,8 @@ public class WeatherFragment extends Fragment {
         String temp = weather.now.temperature + "℃";
         String weatherInfo = weather.now.more.info;
         int imgCode = weather.now.more.code;
+        //设置通知栏所需要的天气信息存储
+
         SharedPreferences.Editor editor = getActivity().getSharedPreferences("notification",Context.MODE_PRIVATE).edit();
         editor.putString("cityName", cityName);
         editor.putString("temperature",temp);
@@ -191,6 +169,8 @@ public class WeatherFragment extends Fragment {
         tempText.setText(temp);
         mToolbar.setTitle(cityName);
         weatherInfoText.setText(weatherInfo);
+        //设置天气信息的相应Icon
+
         if (imgCode == 100) {
             imgWeather.setImageResource(R.mipmap.sun);
         }
@@ -220,6 +200,8 @@ public class WeatherFragment extends Fragment {
         }
 
         hourforecastLayout.removeAllViews();
+        //动态加载未来小时的天气信息
+
         for (HourForecast hourForecast:weather.hourForecastList){
             View viewHour =LayoutInflater.from(getActivity()).inflate(R.layout.item_hour,hourforecastLayout,false);
             TextView hourText = (TextView) viewHour.findViewById(R.id.hour_clock);
@@ -236,6 +218,8 @@ public class WeatherFragment extends Fragment {
             hourforecastLayout.addView(viewHour);
         }
         forecastLayout.removeAllViews();
+        //动态加载未来几天的天气信息
+
         for (Forecast forecast : weather.forecastsList){
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_forecast,forecastLayout,false);
             TextView dateText= (TextView) view.findViewById(R.id.date_Text);
@@ -244,10 +228,13 @@ public class WeatherFragment extends Fragment {
             TextView minText= (TextView) view.findViewById(R.id.min_Text);
             TextView maxText= (TextView) view.findViewById(R.id.max_Text);
             String WeatherDate=forecast.date;
-            //日期转换星期
+            //返回JSON数据中的日期转换成星期
+            
             String weekDate = Common.getDate(WeatherDate);
             dateText.setText(weekDate);
             int foreCode  = forecast.more.foreCode;
+            //设置天气信息的相应Icon
+
             if (foreCode >= 100 && foreCode <= 103  ){
                 forecastImg.setImageResource(R.mipmap.foredaysun);
             }
@@ -291,8 +278,13 @@ public class WeatherFragment extends Fragment {
         dressTxt.setText(dresstxt);
         scrWeatherLayout.setVisibility(View.VISIBLE);
     }
+
+    /**
+     * 在requestWeather()方法中调用了sendOkHttpRequest()方法向服务器请求数据
+     * 相应的数据会回调到onResponse()方法中 
+     */
     public void requestWeather( String weatherId) {
-//        Log.d("LifeCycle",weatherId);
+
         String weatherUrl = "https://api.heweather.com/v5/weather?city="+weatherId+"&key=342a3bf415f84fc7ba09cf90e66fcee1";
         Log.i("天气详情", weatherUrl);
         HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
@@ -308,6 +300,9 @@ public class WeatherFragment extends Fragment {
                 });
             }
 
+    /**在onResponse()方法中 调用Utility.handleWeatherResponse()进行数据解析和处理
+     *请求成功后把数据储存
+     */
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String responseText = response.body().string();

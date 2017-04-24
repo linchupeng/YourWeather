@@ -100,8 +100,7 @@ public class SettingActivity extends PreferenceActivity {
         }
 
 
-
-
+        //通知栏显示天气相应的信息
         private void initNotification() {
             SharedPreferences prefs = getActivity().getSharedPreferences("notification",MODE_PRIVATE);
             final String cityName = prefs.getString("cityName","");
@@ -112,7 +111,6 @@ public class SettingActivity extends PreferenceActivity {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     if (mNotification.isChecked()){
-//                        Toast.makeText(getActivity(), "选中", Toast.LENGTH_SHORT).show();
                         NotificationManager manager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
                         NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity());
                         Notification notification  = builder
@@ -124,7 +122,6 @@ public class SettingActivity extends PreferenceActivity {
                                 .build();
                         manager.notify(1,notification);
                     }else{
-//                        Toast.makeText(getActivity(), "取消", Toast.LENGTH_SHORT).show();
                         NotificationManager manager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
                         manager.cancelAll();
                     }
@@ -133,37 +130,7 @@ public class SettingActivity extends PreferenceActivity {
                 }
             });
         }
-        private void initUpdate_time() {
-            mUpdate_time=findPreference("update_time");
-            mUpdate_time.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    View dialogLayout = inflater.inflate(R.layout.update_weather, (ViewGroup) getActivity().findViewById(
-                            R.id.dialog_root));
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                            .setView(dialogLayout);
-                    final AlertDialog alertDialog = builder.create();
-
-                    final SeekBar mSeekBar = (SeekBar) dialogLayout.findViewById(R.id.time_seekBar);
-                    final TextView tvShowHour = (TextView) dialogLayout.findViewById(R.id.tv_showhour);
-                    TextView tvDone = (TextView) dialogLayout.findViewById(R.id.done);
-
-                    mSeekBar.setMax(24);
-//                    mSeekBar.setProgress(mSharedPreferenceUtil.getAutoUpdate());
-//                    tvShowHour.setText(String.format("每%s小时", mSeekBar.getProgress()));
-                    alertDialog.show();
-                    tvDone.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            alertDialog.dismiss();
-                        }
-                    });
-
-                    return false;
-                }
-            });
-        }
+       
         private void initUpdate() {
             mUpdate=findPreference("update_version");
             mUpdate.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -177,4 +144,4 @@ public class SettingActivity extends PreferenceActivity {
 
     }
 
-}
+

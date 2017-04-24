@@ -31,13 +31,12 @@ public class AboutActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-//        getWindow().setStatusBarColor(Color.TRANSPARENT);
-//        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE|View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         initView();
         initToolBar();
     }
 
 
+    //初始化ToolBar控件相关设置
 
     private void initToolBar() {
         Toolbar toolbarAbout = (Toolbar) findViewById(R.id.toolbar_about);

@@ -9,6 +9,9 @@ import com.google.gson.annotations.SerializedName;
  * GitHub:https://github.com/linchupeng/YourWeather
  */
 
+    /**
+     *当前天气温度和情况
+     */
 public class Now {
     @SerializedName("tmp")
     public String temperature;

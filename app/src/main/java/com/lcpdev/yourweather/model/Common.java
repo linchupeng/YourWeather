@@ -51,8 +51,9 @@ public class Common {
             +"西宁CN101150101海东CN101150201黄南CN101150301海南CN101150401果洛CN101150501玉树CN101150601海西CN101150701海北CN101150801格尔林CN101150901\n"
             +"兰州CN101160101定西CN101160201平凉CN101160301庆阳CN101160401武威CN101160501金昌CN101160601张掖CN101160701酒泉CN101160801天水\n" +
             "CN101160901陇南CN101161001临夏CN101161101甘南CN101161201白银CN101161301嘉峪关CN101161401银川CN101170101石嘴山CN101170201吴忠CN101170301固原CN101170401中卫CN101170501\n";
+
 /**
- * 通过城市的名称获取对应的城市id，如果不存在则返回 null
+ * 通过城市的名称获取对应的城市id，如果不存在则返回 加载默认的城市(厦门)
  * @return weatherId;
  */
 
@@ -64,7 +65,7 @@ public class Common {
             return "CN101230601";
         }
         weatherId = Common.CITYIDS.substring(startIndex, startIndex + 11);
-//        Log.d("CityName",weatherId);
+
         return weatherId;
     }
     /**
@@ -90,6 +91,10 @@ public class Common {
         return week;
 
     }
+     /**
+     * 截取小时天气时间 eg: 2017-2-16 18:00
+     * 保留18:00
+     */
     public static String getHour(String Hour){
         String str = Hour;
         String weatherHour = str.substring(10);

@@ -109,8 +109,6 @@ public class ChooseCity extends BaseActivity {
         setSupportActionBar(toolbarTitle);
         if (getSupportActionBar()!=null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            //去除默认Title显示
-//            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
         toolbarTitle.setNavigationOnClickListener(new View.OnClickListener() {
@@ -218,6 +216,10 @@ public class ChooseCity extends BaseActivity {
 
         }
     }
+    /**
+     * 在queryFromServer()方法中调用了HTTPsendOkHttpRequest()方法向服务器请求数据
+     * 相应的数据会回调到onResponse()方法中 
+     */
     private void queryFromServer(String address, final String type) {
         showProgressDialog();
         HttpUtil.sendOkHttpRequest(address, new Callback() {
@@ -231,6 +233,8 @@ public class ChooseCity extends BaseActivity {
                     }
                 });
             }
+
+            //在onResponse()方法中 调用Utility.handleProvinceResponse()进行数据解析和处理
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
@@ -285,7 +289,6 @@ public class ChooseCity extends BaseActivity {
             queryCity();
         } else if (currentLeveL == LEVEL_CITY) {
             queryProvince();
-//            finish();
         }
     }
 
