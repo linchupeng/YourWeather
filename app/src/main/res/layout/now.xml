@@ -8,7 +8,6 @@
     care_view:cardElevation="2dp"
     care_view:cardCornerRadius="2dp"
     android:clickable="true">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="180dp"
@@ -48,10 +47,10 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
         <LinearLayout
-            android:id="@+id/tmp"
+            android:id="@+id/quality"
             android:layout_below="@id/linear_temp"
             android:gravity="end"
-            android:layout_marginTop="21dp"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -64,20 +63,21 @@
                 android:layout_gravity="center"
                 android:id="@+id/airQlty"
                 android:layout_marginEnd="30dp"
-                android:text="N/A"
+                android:text=":N/A"
                 android:textSize="17sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
 
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/linear_pm"
-            android:layout_below="@id/tmp"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/relative_pm"
+            android:layout_below="@id/quality"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
             <TextView
+                android:id="@+id/pm"
                 android:text="PM2.5:"
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
@@ -87,20 +87,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:paddingTop="5dp"
+                android:layout_toRightOf="@+id/pm"
                 android:text="N/A"
                 />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_below="@id/tmp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="6dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
             <TextView
                 android:text="AQI指数:"
                 android:textSize="16sp"
+                android:layout_toLeftOf="@+id/aqi_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -108,10 +101,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:paddingTop="5dp"
+                android:layout_alignParentRight="true"
                 android:paddingRight="15dp"
                 android:text="N/A"
                 />
-        </LinearLayout>
+        </RelativeLayout>
+        <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_below="@id/tmp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_alignParentEnd="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginBottom="6dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;&gt;&ndash;&gt;-->
+            <!--&lt;!&ndash;&lt;!&ndash;<TextView&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:text="AQI指数:"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:textSize="16sp"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_height="wrap_content" />&ndash;&gt;&ndash;&gt;-->
+            <!--&lt;!&ndash;&lt;!&ndash;<TextView&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:id="@+id/aqi_text"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:textSize="16sp"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:paddingTop="5dp"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:paddingRight="15dp"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;android:text="N/A"&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;/>&ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
     </RelativeLayout>
 </android.support.v7.widget.CardView>

@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.lcpdev.yourweather.util.ToolBarActivity;
+
 /**
  * Created by LCP on 2017/2/4.
  * @ Email:chuge94@163.com

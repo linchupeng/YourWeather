@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="系统设置">
+    <PreferenceCategory
+        android:title="系统设置"
+        >
 
         <CheckBoxPreference
             android:key="notification"
             android:title="通知栏常驻"
             />
-        <Preference
-            android:key="update_time"
-            android:title="自动刷新"/>
         <Preference
             android:key="update_version"
             android:title="检查更新"

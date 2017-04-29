@@ -22,38 +22,41 @@
     <application
         android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="3f13d2cadb211053282db1d5088cf791"></meta-data>
-
-        <service android:name="com.amap.api.location.APSService"></service>
+            android:value="3f13d2cadb211053282db1d5088cf791">
+        </meta-data>
+        <service android:name="com.amap.api.location.APSService">
+        </service>
 
         <activity
             android:name=".model.FirstActivity"
-            android:theme="@style/FullScreen">
+            android:theme="@style/FirstTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask">
+        </activity>
         <activity android:name=".ChooseCity" />
         <activity
             android:name=".AboutActivity"
-            android:theme="@style/TransparentTheme"></activity>
-        <activity android:name=".SettingActivity"></activity>
-
+            android:theme="@style/FullScreen">
+        </activity>
+        <activity android:name=".SettingActivity">
+        </activity>
         <service
             android:name=".service.AutoUpdateService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true">
+        </service>
     </application>
 
 </manifest>

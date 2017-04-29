@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-
     <resources>
-        <style name="ImageTranslucentTheme" parent="Theme.AppCompat.Light.NoActionBar">
-            <item name="android:windowTranslucentStatus">true</item>
-            <item name="android:windowTranslucentNavigation">true</item>
-            <item name="android:statusBarColor">@android:color/transparent</item>
-        </style>
+    <style name="TransparentTheme" parent="AppTheme">
+        <!--<item name="android:windowFullscreen">true</item>-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+    <style name="ToolBarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorControlNormal">@color/toolbarColor</item>
+        <item name="android:homeAsUpIndicator">@color/toolbarColor</item>
+    </style>
     </resources>

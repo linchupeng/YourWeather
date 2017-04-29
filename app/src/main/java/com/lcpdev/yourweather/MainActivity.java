@@ -55,7 +55,7 @@ import static com.lcpdev.yourweather.model.Common.getCityIdByName;
  */
 public class MainActivity extends BaseActivity {
     private DrawerLayout mDrawerLayout;
-//    private List<City> cityList;
+
     private FragmentManager manager;
     private Toolbar indexToolBar;
     public AMapLocationClient mLocationClient=null;

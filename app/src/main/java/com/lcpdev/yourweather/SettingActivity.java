@@ -66,6 +66,7 @@ public class SettingActivity extends PreferenceActivity {
         });
 
     }
+
     private void setSupportActionBar(Toolbar mToolbar) {
         getDelegate().setSupportActionBar(mToolbar);
 
@@ -76,52 +77,53 @@ public class SettingActivity extends PreferenceActivity {
     }
 
     private void initFragment() {
-        getFragmentManager().beginTransaction().replace(R.id.content,new SettingFragment()).commit();
+        getFragmentManager().beginTransaction().replace(R.id.content, new SettingFragment()).commit();
     }
 
     public AppCompatDelegate getDelegate() {
-        if (delegate == null){
-            delegate =AppCompatDelegate.create(this,null);
+        if (delegate == null) {
+            delegate = AppCompatDelegate.create(this, null);
         }
         return delegate;
     }
 
-    public static class SettingFragment extends PreferenceFragment{
+    public static class SettingFragment extends PreferenceFragment {
         private Preference mUpdate;
-        private  Preference mUpdate_time;
+
         private CheckBoxPreference mNotification;
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(settingui);
             initNotification();
-            initUpdate_time();
+
             initUpdate();
         }
 
 
         //通知栏显示天气相应的信息
         private void initNotification() {
-            SharedPreferences prefs = getActivity().getSharedPreferences("notification",MODE_PRIVATE);
-            final String cityName = prefs.getString("cityName","");
-            final String temp = prefs.getString("temperature","");
-            final String weatherInfo = prefs.getString("weatherInfo","");
-            mNotification= (CheckBoxPreference) findPreference("notification");
+            SharedPreferences prefs = getActivity().getSharedPreferences("notification", MODE_PRIVATE);
+            final String cityName = prefs.getString("cityName", "");
+            final String temp = prefs.getString("temperature", "");
+            final String weatherInfo = prefs.getString("weatherInfo", "");
+            mNotification = (CheckBoxPreference) findPreference("notification");
             mNotification.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    if (mNotification.isChecked()){
+                    if (mNotification.isChecked()) {
                         NotificationManager manager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
                         NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity());
-                        Notification notification  = builder
-                                .setContentTitle(cityName+"-"+weatherInfo)
-                                .setContentText("当前温度:"+temp)
+                        Notification notification = builder
+                                .setContentTitle(cityName + "-" + weatherInfo)
+                                .setContentText("当前温度:" + temp)
                                 .setWhen(System.currentTimeMillis())
                                 .setSmallIcon(R.mipmap.bat)
-                                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.bat))
+                                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.bat))
                                 .build();
-                        manager.notify(1,notification);
-                    }else{
+                        manager.notify(1, notification);
+                    } else {
                         NotificationManager manager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
                         manager.cancelAll();
                     }
@@ -130,9 +132,9 @@ public class SettingActivity extends PreferenceActivity {
                 }
             });
         }
-       
+        //由于时间关系该躬耕还未实现 先用Toast替代 嘿嘿
         private void initUpdate() {
-            mUpdate=findPreference("update_version");
+            mUpdate = findPreference("update_version");
             mUpdate.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
@@ -143,5 +145,6 @@ public class SettingActivity extends PreferenceActivity {
         }
 
     }
+}
 
 

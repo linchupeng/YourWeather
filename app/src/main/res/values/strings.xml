@@ -2,11 +2,11 @@
     <string name="app_name">你的天气</string>
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
-    <string name="thanks">• 郭霖:http://my.csdn.net/sinyu890807\n• stormzhang: http://stormzhang.com/posts\n• xcc3641:http://imxie.cc\n• 和风天气提供数据支持\n• 高德地图提供定位支持</string>
+    <string name="thanks">• 郭霖:http://my.csdn.net/sinyu890807\n• stormzhang: http://stormzhang.com\n• xcc3641:http://imxie.cc\n• iconfont:http://www.iconfont.cn\n• 和风天气提供数据支持\n• 高德地图提供定位支持</string>
     <string name="settingContent">你的天气是一款简单而又不失简约的天气应用，没有过多的权限和常驻内存。该项目已经开源，希望在开源的路上能给你点思路也能给我错误的反馈，致还在开发这条道路的我们:-)。</string>
     <string name="introduction">天气简介</string>
-    <string name="bullshit">实力吐槽作者</string>
-    <string name="friends">作者交个朋友</string>
-    <string name="shared">分享你的天气</string>
-    <string name="viewCode">查看项目源码</string>
+    <string name="bullshit">吐槽作者</string>
+    <string name="friends">交个朋友</string>
+    <string name="shared">分享天气</string>
+    <string name="viewCode">查看源码</string>
 </resources>
