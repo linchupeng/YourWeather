@@ -6,7 +6,8 @@
 你的天气是一款简单而又不简约的天气应用 没有过多的权限和常驻内存<br />
 
 ### 下载地址 :
-[http://sj.qq.com/myapp/detail.htm?apkName=com.lcpdev.yourweather](http://sj.qq.com/myapp/detail.htm?apkName=com.lcpdev.yourweather)<br />
+#### 酷安：[http://www.coolapk.com/apk/com.lcpdev.yourweather](http://www.coolapk.com/apk/com.lcpdev.yourweather)<br/>
+#### 应用宝：[http://sj.qq.com/myapp/detail.htm?apkName=com.lcpdev.yourweather](http://sj.qq.com/myapp/detail.htm?apkName=com.lcpdev.yourweather)<br />
 
 ### 说明 :
 1.	开发工具 : AndroidStudio + Git
