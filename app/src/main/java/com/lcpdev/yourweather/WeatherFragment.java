@@ -285,7 +285,7 @@ public class WeatherFragment extends Fragment {
      */
     public void requestWeather( String weatherId) {
 
-        String weatherUrl = "https://api.heweather.com/v5/weather?city="+weatherId+"&key=342a3bf415f84fc7ba09cf90e66fcee1";
+        String weatherUrl = "https://free-api.heweather.com/v5/weather?city="+weatherId+"&key=342a3bf415f84fc7ba09cf90e66fcee1";
         Log.i("天气详情", weatherUrl);
         HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
             @Override
