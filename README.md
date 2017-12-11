@@ -31,5 +31,8 @@
 
 ![](https://github.com/linchupeng/YourWeather/blob/master/images/detail.png)
 
-####  如果你觉得项目对你有帮助  可以请up主喝咖啡。
-![](http://ozxa90mdk.bkt.clouddn.com/linchupeng.png)
+####  如果觉得项目对你有帮助，可以请 up 主喝咖啡 :)
+<div align=center>
+![]((http://ozxa90mdk.bkt.clouddn.com/linchupeng.png))
+</div>
+
