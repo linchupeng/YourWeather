@@ -30,3 +30,6 @@
 ### 效果图 :
 
 ![](https://github.com/linchupeng/YourWeather/blob/master/images/detail.png)
+
+####  如果你觉得项目对你有帮助  可以请up主喝咖啡。
+![](http://ozxa90mdk.bkt.clouddn.com/linchupeng.png)
